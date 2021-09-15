@@ -54,7 +54,7 @@ Saya tambahkan dengan link ini:
    ```
    
    Lalu ketika view all, terlihat bioskop custom yang saya buat di paling bawah.
-   ![]![](/Users/dellapatricia/Downloads/APAP/tutorial/tutorial-apap/Gambar_No-5.png)
+   ![](Gambar_No-5.png)
 
 ### What I did not understand
 Saya memahami lab kali ini walaupun sedikit-sedikit lupa dengan materi PPW dan DDP. Tetapi dengan melihat beberapa dokumen Springboot dan tutorial sebelumnya, saya jadi lebih familiar. Namun pemakaian @Override, @Autowired dan lainnya masih kurang bisa dipahami dan tidak familiar.
