@@ -2,6 +2,65 @@
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
 ---
+## Tutorial 2
+### What I have learned today
+Saya jadi lebih memahami PathVariable dan RequestParam. Pemahaman saya saat PPW dan juga DDP terpakai disini. Saya juga semakin memahami alur dari Springboot karena tutorial ini.
+
+### Github
+1. Pertanyaan 1: Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut:
+   ```
+   http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10
+   ```
+   Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi.
+
+Yang terjadi adalah Whitelabel Error Page dengan error 500. Path name /bioskop/add akan memanggil addBioskop method dimana method tersebut akan return suatu template. Namun, page html dengan nama add-bioskop belum dibuat sehingga menimbulkan error.
+
+2. Pertanyaan 2: Menurut kamu anotasi @Autowired pada class Controller tersebut merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja @Autowired tersebut dalam konteks service dan controller yang telah kamu buat. 
+
+@Autowired ditaruh di atas properti dimana anotasi ini akan mengeliminasi kebutuhan properti untuk menciptakan getter setter. Spring akan otomatis injection dengan anotasi tersebut karena anotasi ini adalah fitur utama dari Dependency Injection. Walaupun masih sedikit dampaknya, namun implementasi anotasi ini bisa mempermudah kita dalam penulisan kode.
+
+3. Pertanyaan 3: Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut:
+   ```
+   http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx 
+   ```
+   Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi.
+
+Yang terjadi adalah Whitelabel Error Page dengan error 400 yaitu Bad Request. Yang terjadi adalah pada URL, kurang query pada query parameters dimana jika mengakses path /bioskop/add dibutuhkan 5 query tetapi hanya 4 query yang ada pada query parameter.
+   
+4. Pertanyaan 4: Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
+
+Jika belum menambahkan nama Bioskop Maung, maka harus menambahkan Bioskop Maung terlebih dahulu dengan:
+   ```
+   http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Maung&alamat=Fasilkom%20UI&noTelepon=021450XXX&jumlahStudio=5
+   ```
+   
+Kemudian akses Bioskop tersebut dengan:
+   ```
+   http://localhost:8080/bioskop/view?idBioskop=1
+   ```
+
+6. Pertanyaan 5: Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan juga bukti screenshotmu.
+
+Saya menambahkan:
+   - idBioskop : 3
+   - nama Bioskop : Della
+   - alamat rumah : Della
+   - notelepon : 0813xxx
+   - jumlah studio : 8 
+
+Saya tambahkan dengan link ini:
+   ```
+   http://localhost:8080/bioskop/add?idBioskop=3&namaBioskop=Della&alamat=Rumah%20Della&noTelepon=0813xxx&jumlahStudio=8
+   ```
+   
+   Lalu ketika view all, terlihat bioskop custom yang saya buat di paling bawah.
+   ![]![](/Users/dellapatricia/Downloads/APAP/tutorial/tutorial-apap/Gambar_No-5.png)
+
+### What I did not understand
+Saya memahami lab kali ini walaupun sedikit-sedikit lupa dengan materi PPW dan DDP. Tetapi dengan melihat beberapa dokumen Springboot dan tutorial sebelumnya, saya jadi lebih familiar. Namun pemakaian @Override, @Autowired dan lainnya masih kurang bisa dipahami dan tidak familiar.
+
+
+---
 ## Tutorial 1
 ### What I have learned today
 ### Github
@@ -53,9 +112,6 @@
       return "ID: " + id;
     }
     ```
-
-
-
     Untuk @PathVariable digunakan saat ingin mengambil data langsung dari URI templatenya.
     Contoh:
     http://localhost:8080/npm/della bisa mendapatkan nilai nama yaitu della dengan 
