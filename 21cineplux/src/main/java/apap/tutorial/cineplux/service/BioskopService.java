@@ -9,7 +9,9 @@ public interface BioskopService {
 
     List<BioskopModel> getBioskopList();
 
-    BioskopModel getBioskopByIdBioskop(String idBioskop);
+    List<BioskopModel> getBioskopBaru(String idBioskop);
 
     List<BioskopModel> deleteBioskop(String idBioskop);
+
+    public BioskopModel getBioskopByIdBioskop(String idBioskop);
 }

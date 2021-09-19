@@ -33,9 +33,18 @@ public class BioskopInMemoryService implements BioskopService{
         return getIdB;
     }
 
+    public List<BioskopModel> getBioskopBaru (String idBioskop) {
+        List<BioskopModel> bioskopBaru = new LinkedList<>();
+        for (BioskopModel b : listBioskop) {
+            if (idBioskop.equals(b.getIdBioskop())) {
+                bioskopBaru.add(b);
+            }
+        }
+        return bioskopBaru;
+    }
+
     @Override
     public List<BioskopModel> deleteBioskop(String idBioskop){
-        System.out.println("oke: " + listBioskop.get(0));
         for (BioskopModel b : listBioskop){
             if (idBioskop.equals(b.getIdBioskop())) {
                 listBioskop.remove(b);
@@ -44,5 +53,7 @@ public class BioskopInMemoryService implements BioskopService{
         }
         return listBioskop;
     }
+
+
 
 }

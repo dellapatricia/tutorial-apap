@@ -42,7 +42,7 @@ public class BioskopController {
             @RequestParam(value = "idBioskop", required = true) String idBioskop,
             Model model
     ) {
-        BioskopModel bioskopModel = bioskopService.getBioskopByIdBioskop(idBioskop);
+        List<BioskopModel> bioskopModel = bioskopService.getBioskopBaru(idBioskop);
         model.addAttribute("bioskop", bioskopModel);
         return "view-bioskop";
     }
