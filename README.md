@@ -2,6 +2,30 @@
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
 ---
+## Tutorial 3
+### What I have learned today
+Saya telah mempelajari tentang Java Persistence API (JPA) lalu juga berkenalan dengan XAMPP, Apache, MySql PHPmyadmin. Saya juga mempelajari relasi database pada spring boot dimana. 
+
+### Pertanyaan
+1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model (@AllArgsConstructor, @NoArgsConstructor, @Setter, @Getter, @Entity, @Table)
+@AllArgsConstructor akan mengenerate sebuah constructor dengan 1 parameter sedangkan @NoArgsConstructor akan mengenerate sebuah constructor tanpa parameter. Untuk @Getter dan @Setter, keduanya akan mengenerate getter/setter secara otomatis pada setiap field yang ada pada kelas. Lalu @Entity adalah anotasi JPA yang memiliki fungsi untuk menganotasikan sebuah kelas sebagai suatu JPA entity class. Terakhir adalah @Table dimana anotasi tersebut memiliki fungsi untuk menentukan detail yang lebih jelas terkait tabel yang berhubungan dengan kelas.
+
+2. Pada class BioskopDB, terdapat method findByNoBioskop, apakah kegunaan dari method tersebut?
+Kegunaan dari method adalah untuk mencari BioskopModel pada database Bioskop berdasarkan nomor bioskop.
+
+3. Jelaskan perbedaan kegunaan dari anotasi @JoinTable dan @JoinColumn 
+@JoinTable akan menyimpan hubungan antara suatu tabel a dan tabel b dalam suatu tabel yang baru sedangkan @JoinColumn akan menyimpan hubungan kedua tabel dalam suatu kolom baru. @JoinColumn akan memberikan entitas yang berhubungan dengan entitas lain suatu foreign key sedangkan @JoinTable akan menyajikan seluruh hubungan antar entitas. 
+
+4.  Pada class PenjagaModel, digunakan anotasi @JoinColumn pada atribut bioskop, apa kegunaan dari name, referencedColumnName, dan nullable dalam anotasi tersebut? dan apa perbedaan nullable dan penggunaan anotasi @NotNull
+Kegunaan "name" adalah sebagai foreignkey pada sebuah kolom. Sedangan "referencedColumnName" akan mendefine nama untuk suatu kolom pada tabel yang kita refer. Nullable akan menentukan apakah suatu kolom bisa mengandung nilai null atau tidak. Perbedaanya dengan @NotNull adalah anotasi @NotNull akan langsung menentukan bahwa suatu metode tidak boleh return null.
+
+5. Jelaskan kegunaan FetchType.LAZY, CascadeType.ALL, dan FetchType EAGER!
+FetchType.EAGER digunakan saat kita ingin mendapatkan seluruh elemen suatu relasi dimana sintaks ini dapat memperlambat jalannya aplikasi karena ia akan mengambil data-data yang juga tidak diperlukan ketika dipanggil pada suatu kasus. Sedangkan FetchType.LAZY digunakan saat kita ingin mendapatkan elemen yang kita butuhkan saja sehingga aplikasi akan berjalan lebih cepat dibandingkan dengan FetchType.EAGER. Untuk CascadeType.ALL adalah suatu set operasi cascadable untuk entitas yang saling berhubungan dimana set operasi ini akan perform beberapa operasi seperti PERSIST, MERGE, REMOVE, DETACH, REFRESH untuk entitas parent.
+
+### What I did not understand
+Terlalu banyak materi yang diserap sehingga setiap ilmu yang saya dapatkan belum terlalu saya pahami tetapi saya bisa mengikutinya seiring pengerjaan walau memerlukan wakt yang cukup lama.
+
+---
 ## Tutorial 2
 ### What I have learned today
 Saya jadi lebih memahami PathVariable dan RequestParam. Pemahaman saya saat PPW dan juga DDP terpakai disini. Saya juga semakin memahami alur dari Springboot karena tutorial ini.

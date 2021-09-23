@@ -18,31 +18,43 @@ public class BioskopInMemoryService implements BioskopService{
     }
 
     @Override
+    public void updateBioskop(BioskopModel bioskop) {
+    }
+
+    @Override
     public List<BioskopModel> getBioskopList() {
         return listBioskop;
     }
 
     @Override
-    public BioskopModel getBioskopByIdBioskop(String idBioskop) {
-        BioskopModel getIdB = null;
-        for (BioskopModel b : listBioskop) {
-            if (idBioskop.equals(b.getIdBioskop())) {
-                getIdB = b;
-            }
-        }
-        return getIdB;
+    public BioskopModel getBioskopByNoBioskop(Long noBioskop) {
+        return null;
     }
 
     @Override
-    public List<BioskopModel> deleteBioskop(String idBioskop){
-        System.out.println("oke: " + listBioskop.get(0));
-        for (BioskopModel b : listBioskop){
-            if (idBioskop.equals(b.getIdBioskop())) {
-                listBioskop.remove(b);
-                break;
-            }
-        }
-        return listBioskop;
+    public void deleteBioskop(BioskopModel bioskop) {
+
     }
+
+//    public BioskopModel getBioskopByIdBioskop(String idBioskop) {
+//        BioskopModel getIdB = null;
+//        for (BioskopModel b : listBioskop) {
+//            if (idBioskop.equals(b.getNoBioskop())) {
+//                getIdB = b;
+//            }
+//        }
+//        return null;
+//    }
+
+//    public List<BioskopModel> deleteBioskop(String idBioskop){
+//        System.out.println("oke: " + listBioskop.get(0));
+//        for (BioskopModel b : listBioskop){
+//            if (idBioskop.equals(b.getIdBioskop())) {
+//                listBioskop.remove(b);
+//                break;
+//            }
+//        }
+//        return listBioskop;
+//    }
 
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>21 Cineplux</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Update Penjaga</h2>
+                <br>
+                <div th:if="${(is_tutup) == true}">
+                    <form th:action="@{/penjaga/update}" th:object="${penjaga}" method="POST">
+                        <input type="hidden" th:field="*{bioskop}" />
+                        <input type="hidden" th:field="*{nopenjaga}" />
+                        Nama Penjaga Baru : <br>
+                        <input required class="form-control" type="text" name="namaPenjaga" th:value="*{namaPenjaga}" />
+                        <br>
+
+                        Jenis Kelamin : <br>
+                        <select name="jenisKelamin">
+                            <option th:value="*{0}">Perempuan</option>
+                            <option th:value="*{1}">Laki-laki</option>
+                        </select>
+                        <br><br>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                        <a class="btn btn-primary" href="/">Home</a>
+                    </form>
+                </div>
+                <div th:if="${(is_tutup) == false}">
+                    <h2> Tidak bisa update karena bioskop masih buka! </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary" th:href="@{/bioskop/view(noBioskop=${noBioskop})}">Kembali</a>
+</div>
+
+</body>
+
+</html>

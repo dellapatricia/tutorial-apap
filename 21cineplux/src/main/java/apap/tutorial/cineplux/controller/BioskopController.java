@@ -1,93 +1,102 @@
 package apap.tutorial.cineplux.controller;
 
-import apap.tutorial.cineplux.service.BioskopService;
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.PenjagaModel;
+import apap.tutorial.cineplux.service.BioskopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util. ArrayList;
+import java.util.List;
+import java.time.LocalTime;
 
 @Controller
 public class BioskopController {
+
+    @Qualifier("bioskopServiceImpl")
     @Autowired
     private BioskopService bioskopService;
 
-    @RequestMapping("/bioskop/add")
-    public String addBioskop(
-        @RequestParam(value = "idBioskop", required = true) String idBioskop,
-        @RequestParam(value = "namaBioskop", required = true) String namaBioskop,
-        @RequestParam(value = "alamat", required = true) String alamat,
-        @RequestParam(value = "noTelepon", required = true) String noTelepon,
-        @RequestParam(value = "jumlahStudio", required = true) int jumlahStudio,
-        Model model
-    ) {
-        BioskopModel bioskopModel = new BioskopModel(idBioskop, namaBioskop, alamat, noTelepon, jumlahStudio);
-        bioskopService.addBioskop(bioskopModel);
-        model.addAttribute("idBioskop", idBioskop);
+    @GetMapping("/bioskop/add")
+    public String addBioskopForm(Model model) {
+        model.addAttribute("bioskop",new BioskopModel());
+        return "form-add-bioskop";
+    }
+
+    @PostMapping("/bioskop/add")
+    public String addBioskopsubmit(
+            @ModelAttribute BioskopModel bioskop,
+            Model model
+    ){
+        bioskopService.addBioskop(bioskop);
+        model.addAttribute( "noBioskop", bioskop.getNoBioskop());
         return "add-bioskop";
     }
 
-    @RequestMapping("/bioskop/viewall")
-    public String listBioskop(Model model){
+    @GetMapping("/bioskop/viewall")
+    public String listBioskop(Model model) {
         List<BioskopModel> listBioskop = bioskopService.getBioskopList();
-        model.addAttribute("listBioskop", listBioskop);
-        return "viewall-bioskop";
+        model.addAttribute ( "listBioskop",listBioskop);
+        return "viewall-bioskop" ;
     }
 
-
-    @RequestMapping("/bioskop/view")
-    public String detailBioskop(
-            @RequestParam(value = "idBioskop", required = true) String idBioskop,
+    @GetMapping("/bioskop/view")
+    public String viewDetailBioskop(
+            @RequestParam(value = "noBioskop") Long noBioskop,
             Model model
     ) {
-        BioskopModel bioskopModel = bioskopService.getBioskopByIdBioskop(idBioskop);
-        model.addAttribute("bioskop", bioskopModel);
+        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        List<PenjagaModel> listPenjaga = bioskop.getListPenjaga();
+
+        model.addAttribute( "bioskop", bioskop);
+        model.addAttribute("listPenjaga", listPenjaga);
+        model.addAttribute("now",LocalTime.now());
+
         return "view-bioskop";
     }
 
-
-    @GetMapping(value="/bioskop/view/id-bioskop/{id}")
-    public String getBioskopById(
-            @PathVariable(value= "id") String id, Model model) {
-        if (bioskopService.getBioskopList().contains(bioskopService.getBioskopByIdBioskop(id))) {
-            return detailBioskop(id, model);
-        }
-        return "errorpage";
+    @GetMapping("/bioskop/update/{noBioskop}")
+    public String updateBioskopForm(
+            @PathVariable Long noBioskop,
+            Model model
+    ){
+        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        model.addAttribute( "bioskop",bioskop);
+        return"form-update-bioskop" ;
     }
 
-    @GetMapping(value="bioskop/update/id-bioskop/{id}/jumlah-studio/{jumlah}")
-    public String updateJumlahStudio(
-            @PathVariable String id, @PathVariable int jumlah, Model model) {
-        if (bioskopService.getBioskopList().contains(bioskopService.getBioskopByIdBioskop(id))){
-            BioskopModel bioskopModel = bioskopService.getBioskopByIdBioskop(id);
-            bioskopModel.setJumlahStudio(jumlah);
-            return "updatedpage";
-        }
-
-        return "errorpage";
+    @PostMapping("/bioskop/update")
+    public String updateBioskopSubmit(
+            @ModelAttribute BioskopModel bioskop,
+            Model model
+    ){
+        bioskopService.updateBioskop(bioskop);
+        model.addAttribute( "noBioskop",bioskop.getNoBioskop());
+        return "update-bioskop";
     }
 
-    @GetMapping(value="/bioskop/delete/id-bioskop/{id}")
+    @GetMapping("/bioskop/delete/{noBioskop}")
     public String deleteBioskop(
-            @PathVariable String id, Model model){
-        if (bioskopService.getBioskopList().contains(bioskopService.getBioskopByIdBioskop(id))) {
-            List<BioskopModel> listBioskopdel = bioskopService.deleteBioskop(id);
-            model.addAttribute("listBioskop", listBioskopdel);
-            return "deletedpage";
+            @PathVariable Long noBioskop,
+            Model model
+    ){
+        BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
+        boolean is_nopenjaga = false;
+        boolean is_tutup = false;
+        if (bioskop.getListPenjaga().size() < 1){
+            is_nopenjaga = true;
+            if(!((LocalTime.now().isAfter(bioskop.getWaktuBuka()))&&(LocalTime.now().isBefore(bioskop.getWaktuTutup())))){
+                is_tutup = true;
+                bioskopService.deleteBioskop(bioskop);
+            }
         }
-        return "errorpage";
+        model.addAttribute("noBioskop",bioskop.getNoBioskop());
+        model.addAttribute("is_nopenjaga",is_nopenjaga);
+        model.addAttribute("is_tutup",is_tutup);
+        return "delete-bioskop";
     }
-
-
-
-
-
-
-
-
-
-
 
 }
