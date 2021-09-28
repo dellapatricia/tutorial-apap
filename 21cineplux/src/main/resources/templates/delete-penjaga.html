@@ -12,9 +12,14 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 th:text="'Bioskop dengan nomor bioskop ' + ${noBioskop} + ' berhasil ditambahkan.'"></h2>
+                <div th:if="${(is_tutup) == true}">
+                    <h2 th:text="'Penjaga berhasil terdelete!'"></h2>
+                </div>
+                <div th:if="${(is_tutup) == false}">
+                    <h2 th:text="'Bioskop masih buka, penjaga tidak bisa di delete!'"></h2>
+                </div>
                 <br>
-                <a class="btn btn-primary" href="/">Home</a>
+                <a class="btn btn-primary" th:href="@{/bioskop/viewall}">Kembali</a>
             </div>
         </div>
     </div>
