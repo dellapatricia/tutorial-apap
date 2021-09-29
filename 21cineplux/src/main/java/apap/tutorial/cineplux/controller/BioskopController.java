@@ -1,8 +1,11 @@
 package apap.tutorial.cineplux.controller;
 
 import apap.tutorial.cineplux.model.BioskopModel;
+import apap.tutorial.cineplux.model.FilmModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
 import apap.tutorial.cineplux.service.BioskopService;
+import apap.tutorial.cineplux.service.FilmService;
+import apap.tutorial.cineplux.service.PenjagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,14 +23,34 @@ public class BioskopController {
     @Autowired
     private BioskopService bioskopService;
 
+    @Qualifier("filmServiceImpl")
+    @Autowired
+    FilmService filmService;
+
     @GetMapping("/bioskop/add")
     public String addBioskopForm(Model model) {
         model.addAttribute("bioskop",new BioskopModel());
+        model.addAttribute("listSemuaFilm",filmService.getListFilm());
         return "form-add-bioskop";
     }
 
-    @PostMapping("/bioskop/add")
-    public String addBioskopsubmit(
+
+    @PostMapping(value = "/bioskop/add/", params = {"tambahRow"})
+    private String addRow(
+            @ModelAttribute BioskopModel bioskop,
+            Model model
+    ){
+        if (bioskop.getListFilm() == null){
+            bioskop.setListFilm(new ArrayList<FilmModel>());
+        }
+        bioskop.getListFilm().add(new FilmModel());
+        model.addAttribute("bioskop", bioskop);
+        model.addAttribute( "listSemuaFilm", filmService.getListFilm());
+        return "form-add-bioskop";
+    }
+
+    @PostMapping(value="/bioskop/add/", params = {"simpanRow"})
+    private String saveRow(
             @ModelAttribute BioskopModel bioskop,
             Model model
     ){
@@ -35,6 +58,20 @@ public class BioskopController {
         model.addAttribute( "noBioskop", bioskop.getNoBioskop());
         return "add-bioskop";
     }
+
+    @PostMapping(value="/bioskop/add/", params = {"hapusRow"})
+    private String deleteRow(
+            @ModelAttribute("bioskopModel") BioskopModel bioskop,
+            @RequestParam("hapusRow") int row,
+            Model model
+    ){
+        bioskop.getListFilm().remove(row);
+
+        model.addAttribute("bioskop", bioskop);
+        model.addAttribute( "listSemuaFilm", filmService.getListFilm());
+        return "form-add-bioskop";
+    }
+
 
     @GetMapping("/bioskop/viewall")
     public String listBioskop(Model model) {
@@ -50,11 +87,12 @@ public class BioskopController {
     ) {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         List<PenjagaModel> listPenjaga = bioskop.getListPenjaga();
+        List<FilmModel> listFilmBioskop = bioskop.getListFilm();
 
         model.addAttribute( "bioskop", bioskop);
         model.addAttribute("listPenjaga", listPenjaga);
+        model.addAttribute("listFilmBioskop",listFilmBioskop);
         model.addAttribute("now",LocalTime.now());
-
         return "view-bioskop";
     }
 

@@ -71,23 +71,21 @@ public class PenjagaController {
         return "update-penjaga";
     }
 
-    @GetMapping("/penjaga/delete/{nopenjaga}")
-    public String deletePenjaga(
-            @PathVariable Long nopenjaga,
-            Model model
+
+    @PostMapping("/penjaga/delete")
+    public String deletePenjagaSubmit(
+            @ModelAttribute BioskopModel bioskop, Model model
     ){
-        PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(nopenjaga);
-        BioskopModel bioskop = penjaga.getBioskop();
         boolean is_tutup = false;
-        if(!((LocalTime.now().isAfter(bioskop.getWaktuBuka()))&&(LocalTime.now().isBefore(bioskop.getWaktuTutup())))){
-            is_tutup = true;
-            penjagaService.deletePenjaga(nopenjaga);
+        for (PenjagaModel penjaga: bioskop.getListPenjaga()){
+            if(!((LocalTime.now().isAfter(bioskop.getWaktuBuka()))&&(LocalTime.now().isBefore(bioskop.getWaktuTutup())))){
+                is_tutup = true;
+                penjagaService.deletePenjaga(penjaga);
+            }
         }
         model.addAttribute("is_tutup", is_tutup);
-        model.addAttribute( "nopenjaga",nopenjaga);
-        model.addAttribute( "namapenjaga",penjaga.getNamaPenjaga());
+        model.addAttribute("noBioskop", bioskop.getNoBioskop());
         return "delete-penjaga";
     }
-
 
 }

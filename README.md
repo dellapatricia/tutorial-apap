@@ -2,6 +2,24 @@
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
 ---
+## Tutorial 4
+### What I have learned today
+Saya belajar lebih dalam pada pengguna thymeleaf dimana tujuan dari thymelead sendiri adalah untuk memfasilitasi developer dalam membuat template yang rapi dan dinamis.
+
+### Pertanyaan
+1. Jelaskan perbedaan th:include dan th:replace!
+Perbedaan th:include dengan th:replace adalah th:include akan mengikutsertakan konten dari suatu fragment kedalam suatu host tag dan memasukkan fragment menjadi badan tag host tanpa mengikutsertakan tag fragmentnya. Sedangkan th:replace akan mensubstitusikan host tag dengan fragmen yang berarti akan menghapus tag host kemudian tag host akan diganti dengan fragmen tambahan serta tag nya.
+
+2. Jelaskan apa fungsi dari th:object!
+th:object memiliki fungsi untuk mendefinisikan suatu objek yang memegang comman object yang adalah suatu bentuk representasi dari sisi backend.
+
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?
+* pada saat penggunaan th:object adalah gambaran bahwa object akan menampung sedangkan $ merujuk pada suatu objek yang akan ditampung. * dipakai ketika akan secara menyeluruh mengambil komponen sedangkan $ dipakai ketika akan mengambil objek yang siap diparsing ke html. 
+
+### What I did not understand
+Sama seperti tutorial sebelumnya, terlalu banyak hal yang dipelajari sendiri sehingga tidak memahami lebih dalam.
+
+---
 ## Tutorial 3
 ### What I have learned today
 Saya telah mempelajari tentang Java Persistence API (JPA) lalu juga berkenalan dengan XAMPP, Apache, MySql PHPmyadmin. Saya juga mempelajari relasi database pada spring boot dimana. 
