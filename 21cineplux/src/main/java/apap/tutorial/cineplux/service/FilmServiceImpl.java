@@ -7,14 +7,20 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
-public class FilmServiceImpl implements FilmService {
+public class FilmServiceImpl implements FilmService{
+
     @Autowired
     FilmDB filmDB;
 
     @Override
-    public void addFilm(FilmModel bioskop) { filmDB.save(bioskop); }
+    public void addFilm(FilmModel film) {
+        filmDB.save(film);
+    }
+
+    @Override public List<FilmModel> getListFilm() {
+        return filmDB.findAll();
+    }
 }

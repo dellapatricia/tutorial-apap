@@ -8,7 +8,7 @@ import java.util.List;
 public interface PenjagaService {
     void addPenjaga(PenjagaModel penjaga);
     void updatePenjaga(PenjagaModel penjaga);
-    void deletePenjaga(Long nopenjaga);
+    void deletePenjaga(PenjagaModel nopenjaga);
     PenjagaModel getPenjagaByNoBioskop(Long noBioskop);
     PenjagaModel getPenjagaByNoPenjaga(Long nopenjaga);
 }

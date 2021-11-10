@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>View All Film</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <h2>Daftar Seluruh Film</h2>
+    <br>
+    <div class="card-body">
+        <div class="justify-content-center">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nomor Film</th>
+                    <th>Nama</th>
+                    <th>Deskripsi</th>
+                    <th>Sedang Tayang</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                    <tr th:each="film, iterationStatus : ${listFilm}">-->
+<!--                        <td th:text="${iterationStatus.count}"></td>-->
+                    <tr th:each="film : ${listFilm}">
+                        <td th:text="${film.noFilm}"></td>
+                        <td th:text="${film.namaFilm}"></td>
+                        <td th:text="${film.deskripsiFilm}"></td>
+                        <td th:if="${film.isDisplaying == 0}" th:text="'YA'"></td>
+                        <td th:if="${film.isDisplaying == 1}" th:text="'TIDAK'"></td>
+                    </tr>
+                </tbody>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+
+</html>

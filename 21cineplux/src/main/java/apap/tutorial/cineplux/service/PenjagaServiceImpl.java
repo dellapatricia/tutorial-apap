@@ -27,8 +27,8 @@ public class PenjagaServiceImpl implements PenjagaService {
     }
 
     @Override
-    public void deletePenjaga(Long nopenjaga) {
-        penjagaDB.deleteById(nopenjaga);
+    public void deletePenjaga(PenjagaModel penjaga) {
+        penjagaDB.delete(penjaga);
     }
 
     @Override
