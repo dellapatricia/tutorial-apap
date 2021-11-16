@@ -79,6 +79,11 @@ public class PenjagaRestController {
         return penjagaRestService.retrieveListPenjaga();
     }
 
+    @GetMapping(value="/list-penjaga/order-by-name")
+    private List<PenjagaModel> orderedListPenjaga() {
+        return penjagaRestService.orderedListPenjaga();
+    }
+
     @GetMapping(value="/penjaga/umur/{noPenjaga}")
     private PenjagaModel predictAge(@PathVariable("noPenjaga") Long noPenjaga){
         try{

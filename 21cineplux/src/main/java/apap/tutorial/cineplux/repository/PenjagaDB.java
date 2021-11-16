@@ -11,4 +11,5 @@ import java.util.List;
 public interface PenjagaDB extends JpaRepository<PenjagaModel, Long> {
     Optional<PenjagaModel> findByBioskop_NoBioskop(Long noBioskop);
     Optional<PenjagaModel> findByNopenjaga(Long nopenjaga);
+    List<PenjagaModel> findAllByOrderByNamaPenjagaAsc();
 }

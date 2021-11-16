@@ -113,5 +113,10 @@ public class PenjagaRestServiceImpl implements PenjagaRestService {
         return penjaga;
     }
 
+    @Override
+    public List<PenjagaModel> orderedListPenjaga() {
+        return PenjagaDB.findAllByOrderByNamaPenjagaAsc();
+    }
+
 
 }

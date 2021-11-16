@@ -19,6 +19,8 @@ public interface PenjagaRestService {
 
     PenjagaModel predictAge(PenjagaModel penjaga);
 
+    List<PenjagaModel> orderedListPenjaga();
+
 //    Mono<String> getStatus(Long noBioskop);
 //
 //    Mono<PenjagaDetail> postStatus();
