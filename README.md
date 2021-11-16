@@ -2,6 +2,26 @@
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
 ---
+## Tutorial 5
+
+### Pertanyaan
+1. Apa itu Postman? Apa kegunaannya?
+Postman adalah alat berupa plugin untuk membagikan, membuat dan menguji coba APIs. Aplikasi ini akan mempermudah untuk membuat dan menyimpan request HTTP/s dimana Postman juga akan menampilkan response dari request tersebut. Request yang bisa kita lakukan pada Postman ada banyak sekali seperti GET, POST, PUT, DELETE, COPY, dan lain-lainnya. Yang utamanya, aplikasi ini akan membantu kita dalam mengembangkan APIs dengan cara  yang lebih mudah dan efisien.
+
+2. Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty.
+- @JsonIgnorePropertis memiliki kegunaan pada kelas untuk menandakan suatu properti yang ingin kita abaikan dalam JSON serialization dan deserialization. Ada beberapa elemen yang dimiliki seperti allowGetters, allowSetters, ignoreUnknown and value.
+- @JsonProperty adalah anotasi untuk mengindikasi nama properti dalam JSON. Anotasi ini akan melakukan serialisasi/deserialisasi nama properti saat kita menggunakan non standar getter dan setter. 
+
+3. Apa kegunaan atribut WebClient?
+WebClient atribut akan memberikan verifikasi request URI dengan objeck mock dimana atribut ini merupakan salah satu interface yang dimiliki oleh Spring. 
+
+4. Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?
+- ResponseEntity adalah suatu representasi respone HTTP secara keseluruhan yaitu status code, header, dan body. ResponseEntity dapat digunakan untuk mengkonfirugasi HTTP response secara keseluruhan
+- BindingResult adalah suatu objek yang menyimpan hasil binding dimana BindingResult mengextend kelas Errors. BindingResult akan menyimpan validasi yang berisi kesalahan yang mungkin terjadi.
+
+### What I did not understand
+Sama seperti tutorial sebelumnya, terlalu banyak hal yang dipelajari sendiri sehingga tidak memahami lebih dalam.
+---
 ## Tutorial 4
 ### What I have learned today
 Saya belajar lebih dalam pada pengguna thymeleaf dimana tujuan dari thymelead sendiri adalah untuk memfasilitasi developer dalam membuat template yang rapi dan dinamis.
