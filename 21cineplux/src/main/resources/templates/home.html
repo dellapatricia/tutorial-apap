@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -12,14 +12,24 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <div class="d-flex justify-content-center">
     <div class="m-4">
+        <h2 th:text=" 'Hello ' +  ${#httpServletRequest.remoteUser} + '!'"> Login As</h2>
         <h2>Selamat datang di 21Cineplux</h2>
         <div class="d-flex justify-content-center">
             <a th:href="@{/bioskop/viewall}" class="mx-2 btn btn-warning">Lihat semua bioskop</a>
             <a th:href="@{/bioskop/add}" class="mx-2 btn btn-outline-warning">Tambah bioskop</a>
+
         </div>
         <div class="my-3 d-flex justify-content-center">
             <a th:href="@{/film/viewall}" class="mx-2 btn btn-warning">Lihat semua film</a>
             <a th:href="@{/film/add}" class="mx-2 btn btn-outline-warning">Tambah film</a>
+        </div>
+        <div th:if="${role == 'ADMIN'}">
+            <div class="my-3 d-flex justify-content-center">
+                <a th:href="@{/user/viewall}" class="mx-2 btn btn-warning">Lihat semua user</a>
+            </div>
+        </div>
+        <div class="my-3 d-flex justify-content-center">
+            <a th:href="@{/user/setpassword}" class="mx-2 btn btn-primary">Ubah Password</a>
         </div>
     </div>
 </div>

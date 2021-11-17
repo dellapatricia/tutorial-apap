@@ -27,7 +27,8 @@
                 <tbody>
 <!--                    <tr th:each="film, iterationStatus : ${listFilm}">-->
 <!--                        <td th:text="${iterationStatus.count}"></td>-->
-                    <tr th:each="film : ${listFilm}">
+                    <tr th:each="film,  iterationStatus: ${listFilm}">
+                        <td th:text="${iterationStatus.count}"></td>
                         <td th:text="${film.noFilm}"></td>
                         <td th:text="${film.namaFilm}"></td>
                         <td th:text="${film.deskripsiFilm}"></td>

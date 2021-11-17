@@ -1,6 +1,50 @@
 # Tutorial APAP
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
+
+---
+## Tutorial 6
+1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?
+Autentikasi adalah proses dari pengidentifikasian suatu pengguna sedangkan autorisasi adalah proses penentuan apakah seorang pengguna punya akses ke suatu halaman tertentu. 
+
+Implementasi otentikasi yang saya lakukan ada pada class 
+```
+@Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+    }
+```
+
+Implementasi otorisasi yang saya lakukan ada pada class
+```
+ @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/user/add").hasAuthority("ADMIN")
+                .antMatchers("/user/viewall").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+    }
+```
+
+2. Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerja dan tujuannya.
+BCryptPasswordEncode adalah kelas yang mengimplement PasswordEncode dimana kelas ini akan melakukan hashing untuk menyimpan password dalam suatu database. Secara singkat BCrypt akan menerima password berbentuk plain text dan akan melakukan hashing untuk disimpan pada database. Tujuannya adalah agar password tidak bisa diketahui oleh siapapun selain pemilik password tersebut dimana hal tersebut akan menghindari peretasan informasi pengguna.
+
+3. Apakah penyimpanan password sebaiknya menggunakan encryption atau hashing? Mengapa demikian?
+Encryption sendiri adalah proses dalam mengubah plaintext menjadi ciphertext atau suatu pesan yang sulit untuk dibaca. Walaupun sulit namaun proses pengubahn kembali dari ciphertext ke ;aintest masih mudah dilakukan. Berbeda dengan hashing dimana proses dalam mengubah suatu informasi menggunakan hash funcion dimana informasi mentah dari bahan utama tidak dapat langsung kita dapatkan dengan mudah oleh siapapun. Sehingga password akan lebih aman jika metode penyimpanannya  menggunakan hashing.
+
+4. Jelaskan secara singkat apa itu UUID beserta penggunaannya!
+UUID atau Universally Unique Identifier adalah suatu kode dengan hashing sebanyak 32 karakter yang digunakan untuk keamanan data. UUID akan digenerate untuk id pengguna, berbeda dari BCrypt yang adalah untuk password dimana, yang berguna untuk mengamankan id pengguna dari peretasan. UUID dapat dipastikan berbeda/unik untu setiap objek yang ada di internet sehingga id pengguna akan jadi lebih aman.
+
+5. Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut?
+Kelas UserDetailsServiceImpl akan memberikan informasi pada SpringBoot tentang autorisasi dan autentikasi akun yang ada dimana pada kelas lain, informasi tersebut tidak dapat diberikan sehingga kelas ini harus ada. Kelas ini mampu memberi informasi tersebut dikarenakan kelas ini mengimplements UserDetailService yang merupakan interface yang disediakan oleh Spring Security. Kelas ini mengoverride satu kelas yaitu loadUserByUsername() yang dapat kita customize untuk digunakan dalam mencari user.
 ---
 ## Tutorial 5
 
@@ -21,6 +65,7 @@ WebClient atribut akan memberikan verifikasi request URI dengan objeck mock dima
 
 ### What I did not understand
 Sama seperti tutorial sebelumnya, terlalu banyak hal yang dipelajari sendiri sehingga tidak memahami lebih dalam.
+
 ---
 ## Tutorial 4
 ### What I have learned today
