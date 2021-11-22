@@ -6,18 +6,23 @@ import apap.tutorial.cineplux.model.PenjagaModel;
 import apap.tutorial.cineplux.service.BioskopService;
 import apap.tutorial.cineplux.service.FilmService;
 import apap.tutorial.cineplux.service.PenjagaService;
+import apap.tutorial.cineplux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util. ArrayList;
 import java.util.List;
 import java.time.LocalTime;
 
 @Controller
 public class BioskopController {
+
+    @Autowired
+    private UserService userService;
 
     @Qualifier("bioskopServiceImpl")
     @Autowired
@@ -74,8 +79,10 @@ public class BioskopController {
 
 
     @GetMapping("/bioskop/viewall")
-    public String listBioskop(Model model) {
+    public String listBioskop(Model model, final HttpServletRequest req) {
         List<BioskopModel> listBioskop = bioskopService.getBioskopList();
+        String role = userService.getUserByUsername(req.getRemoteUser()).getRole().getRole();
+        model.addAttribute("role", role);
         model.addAttribute ( "listBioskop",listBioskop);
         return "viewall-bioskop" ;
     }
@@ -83,11 +90,15 @@ public class BioskopController {
     @GetMapping("/bioskop/view")
     public String viewDetailBioskop(
             @RequestParam(value = "noBioskop") Long noBioskop,
+            final HttpServletRequest req,
             Model model
     ) {
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         List<PenjagaModel> listPenjaga = bioskop.getListPenjaga();
         List<FilmModel> listFilmBioskop = bioskop.getListFilm();
+
+        String role = userService.getUserByUsername(req.getRemoteUser()).getRole().getRole();
+        model.addAttribute("role", role);
 
         model.addAttribute( "bioskop", bioskop);
         model.addAttribute("listPenjaga", listPenjaga);
