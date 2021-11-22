@@ -74,7 +74,10 @@ public class UserController {
     ) {
         UserModel user = userService.getUserByUsername(username);
         if (userService.passwordMatch(passLama, user.getPassword())) {
-            if (passBaru.equals(konfPass)) {
+            if (passLama.equals(passBaru)){
+                model.addAttribute("status", "Password baru tidak boleh sama dengan password lama.");
+            }
+            else if (passBaru.equals(konfPass)) {
                 userService.setPassword(user, passBaru);
                 model.addAttribute("status", "Password berhasil diubah!");
             } else {
