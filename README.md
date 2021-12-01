@@ -1,6 +1,34 @@
 # Tutorial APAP
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
+---
+## Tutorial 6
+#### 1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
+#### Soal 1
+Untuk menyelesaikan latihan nomor 1, pertama saya membuka folder Home/Home Func dan mengakses index.js nya. Kemudian saya membuat suatu fungsi handleDeleteItemToCart dengan parameter item dimana saya mengcopas fungsi handleAddItemToCart dimana method push akan saya ubah menjadi splice dengan parameter yaitu target index dan 1. Artinya bahwa pada posisi target index tersebut, akan dihapus 1 item yaitu target index itu sendiri. 
+![](latihan1-1.png)
+Lalu handleDeleteItemToCart akan dipanggil dibagian onitemclick yang titlenya adalah My Cart.
+![](latihan1-2.png)
+#### Soal 2 & 3
+Untuk menyelesaiakn latihan nomor 2, saya membuat fungsi incBalance dan decBalance dimana masing-masing fungsi akan mengurangi balance yang dimiliki dengan harga yang dimasukkan kedalam keranjang. Kedua fungsi tersebut menerima price yang nantinya price dari item yang dipilih akan dipassing nilainya. 
+![](latihan1-3.png)
+![](latihan1-4.png)
+Lalu untuk fungsi decBalance, ketika pengguna memasukkan barang ke dalam keranjang, balance dari pengguna akan dikurangi sehingga decbalance harus dipanggil di fungsi handleAddItemToCart dengan mempassing price dari item yang ingin dimasukkan ke keranjang sehingga balance dari pengguna nantinya akan berkurang.
+![](latihan1-5.png)
+Lalu untuk fungsi incBalance, akan diterapkan saat barang yang masuk ke keranjang ingin di hapus sehingga akan sama dengan fungsi decBalance, fungsi incBalance akan dipangil pada fungsi handleDeleteItemToCart. Namun, bersamaan dengan menyelesaikan latihan nomor 3, kita harus cek terlebih dahulu apakah balance pengguna cukup untuk membeli barang tersebut. Jika balance cukup maka balance akan dikurangi dan aktivitas penambahan item pada keranjangan akan berlangsung. Jika balance tidak cukup, saya menggunakan alert dengan peringatan bahwa balance tidak cukup untuk membeli item tersebut sehingga proses penambahan item tidak akan terlaksanakan.
+![](latihan1-6.png)
+
+#### 2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
+State berguna utnuk menyimpan data dari halaman saat ini butuhkan pada controller view sedangkan props berguna untuk mempassing data dan menghandle event kepada child componentsnya. Lalu ketika saya cari-cari di google, props sifatnya immutable sedangkan state sifatnya mutable. 
+
+#### 3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam React? sebutkan alasannya.
+Menurut saya, sebaiknya kita menggunakan component dalam React. Hal tersebut dikarenakan dengan menggunakan component, kode yang telah kita punya bisa digunakan berkali-kali sehingga kita bisa menggunakannya sesuai dengan kebutuhan. Component pada react dapat mengembalikan react component lainnya sehingga kita bisa membuat app component yang akan membuat render metode menjadi lebih mudah untuk dibaca.
+
+#### 4. Apa perbedaan class component dan functional component?
+Dengan menggunakan class component, kita harus mengextend dari React dan membuat sebuah fungsi render yang akan mengembalikan suatu HTML. Untuk functional component hanyalah suatu fungsi JavaScript yang akan menerima props sebagai argument dengan mengembalikan elemen React dimana functional component tidak memerlukan render method. Class component juga memerlukan constructor untuk menyimpan state sedangkan functional component tidak memerlukan constructors sehingga karena tidak memiliki constructor, tidak ada pemanggilan this pada functional component.
+
+#### 5. Dalam react, apakah perbedaan component dan element?
+Element pada react adalah suatu representasi objek sebuah node DOM dimana sebenarnya elemen hanyalah sebuah plain object. Elemen menjadi deskripsi dari apa yang mau kita tampilkan pada layar dengan beberapa komponen yaitu type, prop, dan nested child. Type dapat berupa DOM elemen atau suatu component element. Sedangkan Component adalah terdiri dari Element dimana bentuknya bisa kelas dengan fungsi render atau functional component. Props menjadi input dengan pengembaliaan element tree.
 
 ---
 ## Tutorial 6
