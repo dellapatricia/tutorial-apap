@@ -2,7 +2,51 @@
 ## Authors
 * **Della Patricia Siregar** - *1906399436* - *C*
 ---
-## Tutorial 6
+## Tutorial 8
+#### 1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian melakukan langkah - langkah tersebut?
+Penambahan kode this.setState({
+title: "",
+price: 0, description: "", category: "", quantity: 0
+})
+akan membuat field menjadi kosong kembali sehingga masalah pada latihan nomor 1 akan terselesaikan.
+![](image-tutorial8/18.png)
+
+#### 2. Jelaskan fungsi dari async dan await!
+Fungsi dari async pada reactjs adalah membuat sebuah fungsi akan selalu mengembalikan sebuah promise. Async membuat penulisan kode menjadi lebih rapih dan jelas dibandingkan sebuah fungsi yang tidak menggunakan async. Sedangkan fungsi dari await pada reactjs adalah untuk membuat program menunggu sampai promise dapat diselesaikan. Await sendiri dipanggil dalam sebuah method async. 
+
+#### 3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 9 pada Component Lifecycle pada pertanyaan ini.
+![](image-tutorial8/1.png)
+![](image-tutorial8/2.png)
+![](image-tutorial8/3.png)
+![](image-tutorial8/4.png)
+![](image-tutorial8/5.png)
+![](image-tutorial8/6.png)
+![](image-tutorial8/7.png)
+![](image-tutorial8/8.png)
+![](image-tutorial8/9.png)
+![](image-tutorial8/10.png)
+![](image-tutorial8/11.png)
+![](image-tutorial8/12.png)
+![](image-tutorial8/13.png)
+![](image-tutorial8/14.png)
+![](image-tutorial8/15.png)
+![](image-tutorial8/16.png)
+![](image-tutorial8/17.png)
+
+#### 4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount. Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.
+- componentdidmount: fungsi digunakan saat ingin mengambil data dimana akan dipangil ketika fase mounting dari react life cycle seperti setelah komponen telah ter render.
+use case -> pengambilan API dari website eksternal
+- shouldComponentUpdate : fungsi dipanggil saat ingin melakukan penentuan untuk menampilkan perubahan pada komponen. Jika true, maka program akan merender ulang secara otomatis sedangkan jika false, maka program tidak ada yang diubah.
+use case ->  merubah dan rendering state yang akan berubah
+- componentDidUpdate : fungsi dipanggil saat kita ingin berinteraksi dengan env yang bukan react seperti API.
+use case -> update pada component 
+- componentWillReceiveProps : fungsi dipanggil saat kita ingin memberitahu kepada react tentang perubahan kepada component yang ada pada projek kita. 
+use case -> reset state
+- componentWillUnmount : fungsi dipanggil saat DOM telah dirender kembali/user dari website berganti website. 
+use case -> penghapusan waktu sela dalam fungsi
+
+---
+## Tutorial 7
 #### 1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
 #### Soal 1
 Untuk menyelesaikan latihan nomor 1, pertama saya membuka folder Home/Home Func dan mengakses index.js nya. Kemudian saya membuat suatu fungsi handleDeleteItemToCart dengan parameter item dimana saya mengcopas fungsi handleAddItemToCart dimana method push akan saya ubah menjadi splice dengan parameter yaitu target index dan 1. Artinya bahwa pada posisi target index tersebut, akan dihapus 1 item yaitu target index itu sendiri. 
