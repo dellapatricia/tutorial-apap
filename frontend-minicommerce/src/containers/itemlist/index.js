@@ -4,6 +4,10 @@ import classes from "./styles.module.css";
 import APIConfig from "../../api/APIConfig";
 import Button from "../../components/button";
 import Modal from "../../components/modal";
+import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from "react-router-dom";
+import { Fab } from "@material-ui/core";
 
 class ItemList extends Component {
     constructor(props) {
@@ -19,8 +23,10 @@ class ItemList extends Component {
             price: 0,
             description: "",
             category: "",
-            quantity: 0
-
+            quantity: 0,
+            targetId: "",
+            targetJumlah: 0,
+            cartItems: []
         };
         this.handleClickLoading = this.handleClickLoading.bind(this);
         this.handleAddItem = this.handleAddItem.bind(this);
@@ -29,9 +35,15 @@ class ItemList extends Component {
         this.handleSubmitItem = this.handleSubmitItem.bind(this);
         this.handleSubmitSearchItem = this.handleSubmitSearchItem.bind(this);
         this.handleSearchItem = this.handleSearchItem.bind(this);
+        this.handleEditItem = this.handleEditItem.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleSubmitEditItem = this.handleSubmitEditItem.bind(this);
+        this.handleAddtoCart = this.handleAddtoCart.bind(this);
+        this.handleCartChange = this.handleCartChange.bind(this);
     }
     componentDidMount() {
         this.loadData();
+        this.loadDataCart();
         console.log("componentDidMount()");
     }
 
@@ -85,6 +97,44 @@ class ItemList extends Component {
             category: item.category,
             quantity: item.quantity
         })
+    }
+
+    handleCartChange(jumlah,idItem,quantity){
+        this.setState({
+            targetQuantity : quantity,
+            targetId : idItem,
+            targetJumlah : jumlah,
+        })
+    }
+
+    async loadDataCart() {
+        try {
+            const { data } = await APIConfig.get("/cart");
+            this.setState({ cartItems: data.result });
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
+    }
+
+    async handleAddtoCart(event){
+        event.preventDefault();
+        try {
+            if (this.state.targetQuantity >= this.state.targetJumlah) {
+            const data = {
+                idItem: this.state.targetId,
+                quantity : this.state.targetJumlah
+            };
+            await APIConfig.post("/cart", data);
+            this.loadData();
+            this.loadDataCart();
+        }else{
+            alert("Stok tidak cukup");
+        }
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
     }
 
     async handleSubmitItem(event) {
@@ -156,18 +206,38 @@ class ItemList extends Component {
         this.handleCancel(event);
     }
 
+    async handleDelete(item) {
+        try {
+            const { data } = await APIConfig.delete("/item/" + item.id);
+            alert("Berhasil delete item dengan id" + item.id)
+            this.loadData();
+        } catch (error) {
+            alert("Oops terjadi masalah pada server");
+            console.log(error);
+        }
+    }
+
     render() {
         return (
             <div className={classes.itemList}> <h1 className={classes.title}>
                 All Items
             </h1>
+            <Link to="/cart">
+                <Fab variant="extended" onClick={this.handleToggle}>
+                    <Badge
+                        color="secondary"
+                        badgeContent={this.state.cartItems.length}
+                    >
+                        <ShoppingCartIcon />
+                    </Badge>
+                </Fab>
+            </Link>
                 <form>
                     <input
                         className={classes.textField}
                         type="text"
                         placeholder="Cari Item"
                         name="title"
-                        value={this.state.title}
                         onChange={this.handleChangeField}
                     />
                     </form>
@@ -189,6 +259,10 @@ class ItemList extends Component {
                         description={item.description} 
                         category={item.category} 
                         quantity={item.quantity}
+                        handleEdit={() => this.handleEditItem(item)}
+                        handleAddtoCart={this.handleAddtoCart}
+                        handleCartChange={this.handleCartChange}
+                        handleDelete={() => this.handleDelete(item)}
                     />
                     ))} </div>
               :
@@ -201,6 +275,10 @@ class ItemList extends Component {
                         description={item.description} 
                         category={item.category} 
                         quantity={item.quantity}
+                        handleEdit={() => this.handleEditItem(item)}
+                        handleAddtoCart={this.handleAddtoCart}
+                        handleCartChange={this.handleCartChange}
+                        handleDelete={() => this.handleDelete(item)}
                     />
                     ))} </div>
                 }
